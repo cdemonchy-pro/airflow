@@ -21,7 +21,7 @@
 
 .. towncrier release notes start
 
-Airflow 2.6.0 (2023-04-20)
+Airflow 2.6.0 (2023-04-24)
 --------------------------
 
 Significant Changes
@@ -92,6 +92,9 @@ installed. Please install Hive Provider > 5.1.0 when using those macros.
 
 New Features
 ^^^^^^^^^^^^
+- Skip PythonVirtualenvOperator task when it returns a provided exit code (#30690)
+- rename skip_exit_code to skip_on_exit_code and allow providing multiple codes (#30692)
+- Add skip_on_exit_code also to ExternalPythonOperator (#30738)
 - Add ``max_active_tis_per_dagrun`` for Dynamic Task Mapping (#29094)
 - Add serializer for pandas dataframe (#30390)
 - Deferrable ``TriggerDagRunOperator`` (#30292)
@@ -134,6 +137,9 @@ New Features
 
 Improvements
 """"""""""""
+- AIP-51 Removing Executor Coupling from Core Airflow (`AIP-51 <https://github.com/apache/airflow/pulls?q=is%3Apr+is%3Amerged+label%3AAIP-51+milestone%3A%22Airflow+2.6.0%22>`_)
+- Add multiple exit code handling in skip logic for BashOperator (#30739)
+- Updated app to support configuring the caching hash method for FIPS v2 (#30675)
 - Preload airflow imports before dag parsing to save time (#30495)
 - Improve task & run actions ``UX`` in grid view (#30373)
 - Speed up TaskGroups with caching property of group_id (#30284)
@@ -190,6 +196,7 @@ Improvements
 
 Bug Fixes
 """""""""
+- Fix d3 dependencies (#30702)
 - Simplify logic to resolve tasks stuck in queued despite stalled_task_timeout (#30375)
 - When clearing task instances try to get associated DAGs from database (#29065)
 - Fix mapped tasks partial arguments when DAG default args are provided (#29913)
@@ -220,6 +227,7 @@ Bug Fixes
 
 Misc/Internal
 """""""""""""
+- Deprecate ``skip_exit_code`` in ``BashOperator`` (#30734)
 - Remove gauge ``scheduler.tasks.running`` (#30374)
 - Bump json5 to 1.0.2 and eslint-plugin-import to 2.27.5 in ``/airflow/www`` (#30568)
 - Add tests to PythonOperator (#30362)
@@ -266,6 +274,8 @@ Misc/Internal
 
 Doc only changes
 """"""""""""""""
+- Add explicit information about how to write task logs (#30732)
+- Better explanation on how to log from tasks (#30746)
 - Use correct import path for Dataset (#30617)
 - Create ``audit_logs.rst`` (#30405)
 - Adding taskflow API example for sensors (#30344)
